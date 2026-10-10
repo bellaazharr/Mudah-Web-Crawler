@@ -1,36 +1,45 @@
-# HPDP Project 1 — Mudah.my Web Crawler
+# 🔎 Mudah.my Web Crawler
 
-## Course
-High Performance Data Processing
+**A Python crawler that collects structured listings from Mudah.my, Malaysia's largest classifieds site.**
 
-## Group Members
-| Name | Student ID | Role |
-|------|-----------|------|
-| AIN NURNABILA BINTI MOHD AZHAR | A23CS0207 | Group Leader & Crawler Part A |
-| DAYANG | [ID] | Crawler Part B & Data Storage |
-| FARRA | [ID] | Data Cleaning & Optimization T1 |
-| SAFIYA | A23CS0176 | Optimization T2 & Performance |
+Built for SECP3133 High Performance Data Processing at UTM, as a team of four. I led the group and built the crawlers for the **Vehicles** and **Property** categories.
 
-## Website
-https://www.mudah.my
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Colab](https://img.shields.io/badge/Google%20Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=white)
+![asyncio](https://img.shields.io/badge/asyncio-concurrency-555?style=flat-square)
+![Dask](https://img.shields.io/badge/Dask-parallel-FC6E6B?style=flat-square)
 
-## Target
-100,000 structured listings from Mudah.my
+## The interesting part
 
-## Data Fields
-- Listing title
-- Item type
-- Price
-- Region
-- Seller
+My first versions used **BeautifulSoup** and then **Selenium** to parse the rendered pages. Both kept breaking, because the live site's HTML is complex and changes often.
 
-## Tools Used
-- Python, BeautifulSoup, Requests
-- Google Colab, Google Drive
-- asyncio, multiprocessing/Dask
+The fix wasn't better parsing. I found that Mudah.my's search is powered by an **internal API**, so I called it directly. That was simpler, much faster and far more stable: it returns clean structured data, with no rendering and no fragile selectors.
 
-## Folder Structure
-- data/ — raw and cleaned datasets
-- p1/ — crawler and cleaning notebooks
-- p2/ — optimization and benchmark notebooks
-- report/ — final report and slides
+The lesson I took away: "high performance" isn't only about optimising code. It starts with picking the right way to get the data in the first place.
+
+## What it collects
+**Target:** 100,000 listings
+
+| Field | Example |
+|---|---|
+| Listing title | Honda City 1.5 V 2021 |
+| Item type | Car / Apartment |
+| Price | RM 78,000 |
+| Region | Selangor |
+| Seller | private or dealer |
+
+## Stack
+- **Collection:** Python, Requests, the Mudah.my internal API (with BeautifulSoup and Selenium as early attempts)
+- **Speed:** asyncio for concurrent requests, multiprocessing and Dask for parallel cleaning
+- **Environment:** Google Colab and Google Drive
+
+## Team
+| Member | Role |
+|---|---|
+| Ain Nurnabila | Group leader · Vehicles & Property crawlers · report intro & system design |
+| Dayang | Crawler part B & data storage |
+| Farra | Data cleaning & optimisation |
+| Safiya | Optimisation & performance benchmarking |
+
+---
+<sub>SECP3133 High Performance Data Processing · Universiti Teknologi Malaysia</sub>
